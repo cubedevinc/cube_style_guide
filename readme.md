@@ -17,17 +17,18 @@ cube_project
     │   │   ├── stripe_invoices.yml
     │   │   └── stripe_payments.yml
     │   └── sales
-    │       └── opportunities.yml
+    │       └── base_opportunities.yml
     └── views
         ├── product
-        │   └── cloud_tenants_view.yml
+        │   └── cloud_tenants.yml
         └── sales
-            └── opportunities_view.yml 
+            └── opportunities.yml 
 ```
 
 
 ## Cubes
 
+* A cube's name should represent business entiity and be plural if possible. If cube's name may clash with view's name use postfix `_base` for cube's name, e.g. `opportunities_base.yml`
 * Cubes properties should be ordered as
   - sql
   - description
@@ -41,15 +42,16 @@ cube_project
 
 * Dimensions and measures properties should be ordered as:
   - name
-  - description (optional)
+  - description 
   - sql
   - type
-  - primary_key (optional)
-  - sub_query (optional)
-  - shown (optional)
-  - format (optional)
-  - filter (optional)
-  - drill_members (optional)
+  - primary_key
+  - sub_query
+  - shown
+  - format
+  - filter
+  - drill_members
+* Use description if name is not intuitive
 
 ## Views
 
@@ -63,7 +65,7 @@ cube_project
 
 ### Example view
 
-```
+```yaml
 views:
   - name: customers_view
 
@@ -97,7 +99,7 @@ views:
 
 ### Example YAML
 
-```
+```yaml
 cubes:
   - name: users
     sql: SELECT * FROM public.users
