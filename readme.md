@@ -127,7 +127,53 @@ views:
 
 ## SQL style guide
 
-* Use trailing commas
+* Use trailing commas.
+* Keywords and function names should all be uppercase.
+* Use `!=` instead of `<>`
+* Always use the `AS` keyword when aliasing columns, expressions, and tables.
+* Unless SQL query is `SELECT * FROM table_name` start SQL query from new line.
+* Use new lines, optimize for readability and maintainability
+* Use CTEs rather than subqueries.
+* When joining multiple tables, always prefix the column names with the table name/alias.
+* Use single quotes for strings.
+* Avoid initialisms and unnecessary table aliases.
+* If there's only one thing, put it on the same line as the opening keyword.
+* If there are multiple things, put each one on its own line (including the first one), indented one level more than the opening keyword.
+* Indents should be 2 spaces.
+
+
+### Example SQL
+
+```yaml
+cubes:
+  - name: california_users
+    sql: 
+      SELECT 
+	id,
+        first_name,
+        last_name
+      FROM public.users
+      WHERE state = 'CA'
+
+    measures:
+      - name: count
+        type: count
+
+    dimensions:
+      - name: id
+        sql: id
+        type: number
+        primary_key: true
+
+      - name: first_name
+        sql: first_name
+        type: string
+
+      - name: last_name
+        sql: last_name
+        type: string
+
+```
 
 ## YAML style guide
 
@@ -167,4 +213,9 @@ cubes:
         type: number
         sub_query: true
 ```
+
+## Credits
+
+This style guide was inspired in part by:
+
 
