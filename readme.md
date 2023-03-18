@@ -2,7 +2,8 @@
 
 Use this style guide when working on `cube_analytics` project, building demos, writing documentation. When working with customers, follow customer style guide if they have any, otherwise use this one.
 
-* Use YAML for data modeling.
+* Default to YAML for data modeling. Use JS data modeling when you need to have dynamic data models.
+* Use snake case, even with JS data models.
 * Cubes must remain private, only views can be exposed to visualization tools.
 
 ## Structure of our Cube project
@@ -30,19 +31,19 @@ cube_project
 
 ## Cubes
 
-* A cube's name should represent business entiity and be plural if possible. If cube's name may clash with view's name use prefix `base_` for cube's name, e.g. `base_opportunities.yml`
-* Cubes properties should be ordered as
+* A cube's name should represent business entiity and be plural. If cube's name may clash with view's name use prefix `base_` for cube's name, e.g. `base_opportunities.yml`.
+* Applicable cube parameters should be ordered as:
   - sql
   - description
   - pre_aggregations
   - joins
   - measures
   - dimensions
-* Primary keys for the cube should be the first dimension listed
+* Primary keys for the cube should be the first dimension listed.
 
 ### Dimensions & measures
 
-* Dimensions and measures properties should be ordered as:
+* Applicable dimensions and measures parameters should be ordered as:
   - name
   - description 
   - sql
@@ -53,16 +54,53 @@ cube_project
   - format
   - filter
   - drill_members
-* Use description if name is not intuitive
+* Use description if name is not intuitive.
+
+### Example cube
+
+
+```yaml
+cubes:
+  - name: line_items
+    sql: SELECT * FROM public.line_items
+      
+    joins:
+      - name: products
+        sql: "{CUBE}.product_id = {products}.id"
+        relationship: belongs_to
+        
+      - name: orders
+        sql: "{CUBE}.order_id = {orders}.id"
+        relationship: belongs_to
+
+    measures:
+      - name: count
+        type: count
+
+      - name: total_amount
+        sql: price
+        type: sum
+
+    dimensions:
+      - name: id
+        sql: id
+        type: number
+        primary_key: true
+        
+      - name: created_date
+        sql: created_at
+        type: time
+```
 
 ## Views
 
-* Views prioperties should be ordered as
+* Applicable views parameters should be ordered as
   - name
   - description
   - includes
   - measures
   - dimensions
+* Use comments with `includes` property of view to delineate measures and dimensions
 
 
 ### Example view
