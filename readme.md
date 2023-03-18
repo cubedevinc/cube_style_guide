@@ -149,7 +149,7 @@ cubes:
   - name: california_users
     sql: 
       SELECT 
-	id,
+        id,
         first_name,
         last_name
       FROM public.users
