@@ -1,5 +1,7 @@
 # Cube Style Guide
 
+Use this style guide when working on `cube_analytics` project, building demos, writing documentation. When working with customers, follow customer style guide if they have any, otherwise use this one.
+
 * Use YAML for data modeling.
 * Cubes must remain private, only views can be exposed to visualization tools.
 
@@ -28,7 +30,7 @@ cube_project
 
 ## Cubes
 
-* A cube's name should represent business entiity and be plural if possible. If cube's name may clash with view's name use postfix `_base` for cube's name, e.g. `opportunities_base.yml`
+* A cube's name should represent business entiity and be plural if possible. If cube's name may clash with view's name use prefix `base_` for cube's name, e.g. `base_opportunities.yml`
 * Cubes properties should be ordered as
   - sql
   - description
