@@ -4,7 +4,7 @@ Use this style guide when working on `cube_analytics` project, building demos, w
 
 * Default to YAML for data modeling. Use JS data modeling when you need to have dynamic data models.
 * Use snake case, even with JS data models.
-* Cubes must remain private, only views can be exposed to visualization tools.
+* Cubes must remain private, set `shown: false` for all cubes. Only views can be exposed to visualization tools.
 
 ## Structure of our Cube project
 
