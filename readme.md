@@ -1,14 +1,15 @@
 # Cube Style Guide
 
-Use this style guide when working on `cube_analytics` project, building demos, writing documentation. When working with customers, follow customer style guide if they have any, otherwise use this one.
+Use this style guide when working on `cube_analytics` project, building demos, and writing documentation. When working with customers, follow the customer style guide if they have any, otherwise use this one.
 
 * Default to YAML for data modeling. Use JS data modeling when you need to have dynamic data models.
+* Define only one `cube` or `view` per file.
 * Use snake case, even with JS data models.
-* Cubes must remain private, set `shown: false` for all cubes. Only views can be exposed to visualization tools.
+* Cubes must remain private. Set `shown: false` for all cubes. Only views can be exposed to visualization tools.
 
 ## Structure of our Cube project
 
-Views and cubes folders structure should reflect business units structure.
+Views and Cubes folder structure should reflect the business unit structure.
 
 Views should be designed for data consumers and optimized for consumption in the visualization tools.
 
@@ -31,8 +32,8 @@ cube_project
 
 ## Cubes
 
-* A cube's name should represent business entiity and be plural. If cube's name may clash with view's name use prefix `base_` for cube's name, e.g. `base_opportunities.yml`.
-* Applicable cube parameters should be ordered as:
+* A cube's name should represent a business entity and be plural. If a cube's name may clash with the view's name, use the prefix `base_` for the cube's name, e.g. `base_opportunities.yml`.
+* Applicable cube parameters should be ordered as follows:
   - sql
   - description
   - pre_aggregations
@@ -43,7 +44,7 @@ cube_project
 
 ### Dimensions & measures
 
-* Applicable dimensions and measures parameters should be ordered as:
+* Applicable dimensions and measures parameters should be ordered as follows:
   - name
   - description 
   - sql
@@ -54,7 +55,7 @@ cube_project
   - format
   - filter
   - drill_members
-* Use description if name is not intuitive.
+* Use description if the name is not intuitive.
 
 ### Example cube
 
@@ -139,7 +140,7 @@ views:
 * Avoid initialisms and unnecessary table aliases.
 * If there's only one thing, put it on the same line as the opening keyword.
 * If there are multiple things, put each one on its own line (including the first one), indented one level more than the opening keyword.
-* Indents should be 2 spaces.
+* Indents should be two spaces.
 
 
 ### Example SQL
@@ -217,5 +218,3 @@ cubes:
 ## Credits
 
 This style guide was inspired in part by:
-
-
