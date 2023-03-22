@@ -218,4 +218,6 @@ cubes:
 
 This style guide was inspired in part by:
 
+* [Brooklyn Data' SQL style guide](https://github.com/brooklyn-data/co/blob/main/sql_style_guide.md)
+* [LAMS Style Guide](https://looker-open-source.github.io/look-at-me-sideways/rules.html)
 
