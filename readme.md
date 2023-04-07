@@ -4,7 +4,7 @@ Use this style guide when working on `cube_analytics` project, building demos, w
 
 * Default to YAML for data modeling. Use JS data modeling when you need to have dynamic data models.
 * Use snake case, even with JS data models.
-* Cubes must remain private, set `shown: false` for all cubes. Only views can be exposed to visualization tools.
+* Cubes must remain private, set `public: false` for all cubes. Only views can be exposed to visualization tools.
 
 ## Structure of our Cube project
 
@@ -32,6 +32,8 @@ cube_project
 ## Cubes
 
 * A cube's name should represent business entiity and be plural. If cube's name may clash with view's name use prefix `base_` for cube's name, e.g. `base_opportunities.yml`.
+* Use `sql_table` if possible. E.g. instead of `sql: SELECT * FROM schema.table` do `sql_table: schema.table`.
+* Use `many_to_one`, `one_to_many`, `one_to_one` relationship type names instead of `belongs_to`, `has_many`, `one_to_one`.
 * Applicable cube parameters should be ordered as:
   - sql
   - description
@@ -62,16 +64,16 @@ cube_project
 ```yaml
 cubes:
   - name: line_items
-    sql: SELECT * FROM public.line_items
+    sql_table: public.line_items
       
     joins:
       - name: products
         sql: "{CUBE}.product_id = {products}.id"
-        relationship: belongs_to
+        relationship: many_to_one
         
       - name: orders
         sql: "{CUBE}.order_id = {orders}.id"
-        relationship: belongs_to
+        relationship: many_to_one
 
     measures:
       - name: count
@@ -97,32 +99,41 @@ cubes:
 * Applicable views parameters should be ordered as
   - name
   - description
-  - includes
-  - measures
-  - dimensions
-* Use comments with `includes` property of view to delineate measures and dimensions
-
+  - cubes
 
 ### Example view
 
 ```yaml
 views:
-  - name: customers_view
+  - name: orders
 
-    includes:
-      # measures
-      - users.total_orders_amount
-      - users.average_lifetime_value
+    cubes:
+      - cube: base_orders
+        includes:
+          # dimensions
+          - status
+          - created_date
 
-      # dimensions
-      - users.signup_date
-      - users.most_recent_order_date
-      - users.number_of_orders
+          # measures
+          - total_amount
+          - total_amlunt_shipped
+          - count
+          - average_order_value
+      
+      - cube: base_orders.line_items.products
+        includes: 
+          - member: name
+            name: product
 
-    measures:
-      - name: count
-        sql: '{users.customers_count}'
-        type: number
+      - cube: base_orders.line_items.products.product_categories
+        includes: 
+          - member: name
+            name: product_category
+
+      - cube: base_orders.users
+        prefix: true
+        includes: 
+          - city
 ```
 
 ## SQL style guide
