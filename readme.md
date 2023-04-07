@@ -33,10 +33,11 @@ cube_project
 
 * A cube's name should represent business entiity and be plural. If cube's name may clash with view's name use prefix `base_` for cube's name, e.g. `base_opportunities.yml`.
 * Use `sql_table` if possible. E.g. instead of `sql: SELECT * FROM schema.table` do `sql_table: schema.table`.
-* Use `many_to_one`, `one_to_many`, `one_to_one` relationship type names instead of `belongs_to`, `has_many`, `one_to_one`.
+* Use `many_to_one`, `one_to_many`, `one_to_one` relationship type names instead of `belongs_to`, `has_many`, `has_one`.
 * Applicable cube parameters should be ordered as:
   - sql
   - description
+  - public
   - pre_aggregations
   - joins
   - measures
@@ -199,7 +200,7 @@ cubes:
 ```yaml
 cubes:
   - name: users
-    sql: SELECT * FROM public.users
+    sql_table: public.users
 
     measures:
       - name: count
