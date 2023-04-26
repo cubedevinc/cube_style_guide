@@ -194,6 +194,7 @@ cubes:
 * List items should be indented.
 * Use a new line to separate list items that are dictionaries, where appropriate.
 * Lines of YAML should be no longer than 80 characters.
+* If quotes are needed around a string, use double quotes
 
 ### Example YAML
 
@@ -207,7 +208,7 @@ cubes:
         type: count
 
       - name: total_orders_amount
-        sql: '{lifetime_value}'
+        sql: "{lifetime_value}"
         type: sum
 
     dimensions:
@@ -221,7 +222,7 @@ cubes:
         type: string
         
       - name: lifetime_value
-        sql: '{line_items.total_amount}'
+        sql: "{line_items.total_amount}"
         type: number
         sub_query: true
 ```
