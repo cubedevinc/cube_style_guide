@@ -35,28 +35,37 @@ cube_project
 * Use `sql_table` if possible. E.g. instead of `sql: SELECT * FROM schema.table` do `sql_table: schema.table`.
 * Use `many_to_one`, `one_to_many`, `one_to_one` relationship type names instead of `belongs_to`, `has_many`, `has_one`.
 * Applicable cube parameters should be ordered as:
-  - sql
-  - description
-  - public
-  - pre_aggregations
-  - joins
-  - measures
-  - dimensions
+  - `name`
+  - `sql_alias`
+  - `extends`
+  - `data_source`
+  - `sql`
+  - `sql_table`
+  - `rewrite_queries`
+  - `title`
+  - `description`
+  - `public`
+  - `refresh_key`
+  - `pre_aggregations`
+  - `joins`
+  - `measures`
+  - `dimensions`
 * Primary keys for the cube should be the first dimension listed.
 
 ### Dimensions & measures
 
 * Applicable dimensions and measures parameters should be ordered as:
-  - name
-  - description 
-  - sql
-  - type
-  - primary_key
-  - sub_query
-  - shown
-  - format
-  - filter
-  - drill_members
+  - `name`
+  - `title`
+  - `description` 
+  - `sql`
+  - `type`
+  - `primary_key`
+  - `sub_query`
+  - `public`
+  - `format`
+  - `filters`
+  - `drill_members`
 * Use description if name is not intuitive.
 
 ### Example cube
